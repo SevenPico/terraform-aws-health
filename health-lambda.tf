@@ -1,9 +1,30 @@
+## ----------------------------------------------------------------------------
+##  Copyright 2023 SevenPico, Inc.
+##
+##  Licensed under the Apache License, Version 2.0 (the "License");
+##  you may not use this file except in compliance with the License.
+##  You may obtain a copy of the License at
+##
+##     http://www.apache.org/licenses/LICENSE-2.0
+##
+##  Unless required by applicable law or agreed to in writing, software
+##  distributed under the License is distributed on an "AS IS" BASIS,
+##  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+##  See the License for the specific language governing permissions and
+##  limitations under the License.
+## ----------------------------------------------------------------------------
+
+## ----------------------------------------------------------------------------
+##  ./health-lambda.tf
+##  This file contains code written by SevenPico, Inc.
+## ----------------------------------------------------------------------------
+
 # ------------------------------------------------------------------------------
 # Health Lambda
 # ------------------------------------------------------------------------------
 module "health_lambda" {
-  source     = "app.terraform.io/SevenPico/lambda-function/aws"
-  version    = "0.1.0.2"
+  source     = "SevenPicoForks/lambda-function/aws"
+  version    = "2.0.0"
   context    = module.context.self
   attributes = ["lambda"]
 
@@ -96,8 +117,8 @@ resource "aws_iam_role_policy_attachment" "health_lambda" {
 # }
 
 module "health_lambda_policy" {
-  source     = "cloudposse/iam-policy/aws"
-  version    = "0.4.0"
+  source     = "SevenPicoForks/iam-policy/aws"
+  version    = "2.0.0"
   context    = module.context.self
   attributes = ["lambda", "policy"]
 
