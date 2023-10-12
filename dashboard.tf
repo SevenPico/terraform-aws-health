@@ -27,7 +27,7 @@ locals {
     for group in var.cloudwatch_alarm_groups : {
       type   = "alarm"
       width  = 24
-      height = ceil(length(group.alarm_arns) / 8)
+      height = 100#ceil(length(group.alarm_arns) / 8)
       properties = {
         title  = group.title
         alarms = group.alarm_arns
