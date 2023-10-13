@@ -84,6 +84,8 @@ locals {
   canary_groups = [
     for groups in var.cloudwatch_synthetics_groups : {
       type   = "metric",
+      x      = 0
+      y      = 0
       width  = 12,
       height = 6,
       properties = {
@@ -110,6 +112,6 @@ resource "aws_cloudwatch_dashboard" "health" {
   count          = module.context.enabled ? 1 : 0
   dashboard_name = module.context.id
   dashboard_body = jsonencode({
-    widgets = concat(local.alarm_widgets, local.http_status_widgets, local.cicd_widgets, var.additional_widgets, local.canary_groups)
+    widgets = concat(local.alarm_widgets, local.http_status_widgets, local.cicd_widgets, local.canary_groups, var.additional_widgets)
   })
 }
