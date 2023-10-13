@@ -50,6 +50,15 @@ variable "cicd_pipeline_groups" {
   default = []
 }
 
+variable "cloudwatch_synthetics_groups" {
+  type = list(object({
+    title   = string
+    metrics = list(string)
+    view    = string
+  }))
+  default = []
+}
+
 # variable "subnet_ids" {
 #   type    = list(string)
 #   default = []
@@ -61,7 +70,7 @@ variable "cicd_pipeline_groups" {
 # }
 
 variable "additional_widgets" {
-  type    = list(any)
+  type    = any
   default = []
 }
 
