@@ -1,5 +1,5 @@
 package:
 	go mod tidy
-	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build
-	zip -qq lambda.zip lambda
-	rm lambda
+	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o bootstrap main.go
+	zip -qq lambda.zip bootstrap
+	rm bootstrap
