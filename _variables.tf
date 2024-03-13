@@ -61,7 +61,7 @@ variable "cicd_pipeline_groups" {
 # }
 
 variable "additional_widgets" {
-  type    = list(any)
+  type    = any
   default = []
 }
 
