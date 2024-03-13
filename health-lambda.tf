@@ -39,7 +39,7 @@ module "health_lambda" {
   filename                            = "${path.module}/lambdas/health/lambda.zip"
   source_code_hash                    = filebase64sha256("${path.module}/lambdas/health/lambda.zip")
   function_name                       = module.context.id
-  handler                             = "bootstrap" #"lambda"
+  handler                             = "bootstrap"
   ignore_external_function_updates    = false
   image_config                        = {}
   image_uri                           = null
@@ -51,7 +51,7 @@ module "health_lambda" {
   publish                             = false
   reserved_concurrent_executions      = 10
   role_name                           = "${module.context.id}-lambda-role"
-  runtime                             = "provided.al2" #"go1.x"
+  runtime                             = "provided.al2"
   s3_bucket                           = null
   s3_key                              = null
   s3_object_version                   = null
