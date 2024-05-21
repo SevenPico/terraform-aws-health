@@ -69,6 +69,13 @@ variable "notify_sns_topic_arn" {
   type = string
 }
 
+variable "reserved_concurrent_executions" {
+  type        = number
+  default     = 10
+  description = "The number of reserved concurrent executions for the Lambda function. This setting ensures that a specified number of function instances are always available to process events. Adjust this value to balance the concurrency needs of the function with the overall account concurrency limits."
+}
+
+
 # variable "sns_pub_principals" {
 #   type    = map(list(string))
 #   default = {}
