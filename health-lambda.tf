@@ -38,7 +38,7 @@ module "health_lambda" {
   event_source_mappings               = {}
   filename                            = "${path.module}/lambdas/health/lambda.zip"
   source_code_hash                    = filebase64sha256("${path.module}/lambdas/health/lambda.zip")
-  function_name                       = module.context.id
+  function_name                       = var.unique_dashboard_name_enabled ? "${module.context.environment}-${var.unique_dashboard_name}-lambda" : module.context.id
   handler                             = "bootstrap"
   ignore_external_function_updates    = false
   image_config                        = {}
