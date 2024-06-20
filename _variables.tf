@@ -75,6 +75,17 @@ variable "reserved_concurrent_executions" {
   description = "The number of reserved concurrent executions for the Lambda function. This setting ensures that a specified number of function instances are always available to process events. Adjust this value to balance the concurrency needs of the function with the overall account concurrency limits."
 }
 
+variable "unique_dashboard_name_enabled" {
+  type        = bool
+  default     = false
+  description = "Specifies whether to enable the creation of a unique dashboard name. When set to true, the Terraform configuration will generate a unique name for a CloudWatch dashboard. Default is false."
+}
+
+variable "unique_dashboard_name" {
+  type        = string
+  default     = ""
+  description = "The unique name to be used for a CloudWatch dashboard. If provided, this name will be used instead of automatically generating one when 'unique_dashboard_name_enabled' is set to true."
+}
 
 # variable "sns_pub_principals" {
 #   type    = map(list(string))
