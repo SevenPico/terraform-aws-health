@@ -38,7 +38,7 @@ module "health_lambda" {
   event_source_mappings               = {}
   filename                            = "${path.module}/lambdas/health/lambda.zip"
   source_code_hash                    = filebase64sha256("${path.module}/lambdas/health/lambda.zip")
-  function_name                       = var.unique_dashboard_name_enabled ? "${module.context.environment}-${var.unique_dashboard_name}-lambda" : module.context.id
+  function_name                       = var.unique_dashboard_name_enabled ? "${module.context.namespace}-${module.context.environment}-${var.unique_dashboard_name}-lambda" : module.context.id
   handler                             = "bootstrap"
   ignore_external_function_updates    = false
   image_config                        = {}
@@ -50,7 +50,7 @@ module "health_lambda" {
   package_type                        = "Zip"
   publish                             = false
   reserved_concurrent_executions      = var.reserved_concurrent_executions
-  role_name                           = var.unique_dashboard_name_enabled ? "${module.context.environment}-${var.unique_dashboard_name}-lambda-role" :"${module.context.id}-lambda-role"
+  role_name                           = var.unique_dashboard_name_enabled ? "${module.context.namespace}-${module.context.environment}-${var.unique_dashboard_name}-lambda-role" :"${module.context.id}-lambda-role"
   runtime                             = "provided.al2"
   s3_bucket                           = null
   s3_key                              = null
@@ -106,7 +106,7 @@ module "health_lambda" {
 
 resource "aws_iam_role_policy_attachment" "health_lambda" {
   count      = module.context.enabled ? 1 : 0
-  role       = var.unique_dashboard_name_enabled ? "${module.context.environment}-${var.unique_dashboard_name}-lambda-role" : "${module.context.id}-lambda-role"
+  role       = var.unique_dashboard_name_enabled ? "${module.context.namespace}-${module.context.environment}-${var.unique_dashboard_name}-lambda-role" : "${module.context.id}-lambda-role"
   policy_arn = module.health_lambda_policy.policy_arn
 }
 
@@ -120,7 +120,7 @@ module "health_lambda_policy" {
   source     = "SevenPicoForks/iam-policy/aws"
   version    = "2.0.0"
   context    = module.context.self
-  attributes = ["lambda", "policy"]
+  attributes = var.unique_dashboard_name_enabled ? ["default", "dashboard", "lambda", "policy"] : ["lambda", "policy"]
 
   description                   = "Lambda Access Policy"
   iam_override_policy_documents = null
