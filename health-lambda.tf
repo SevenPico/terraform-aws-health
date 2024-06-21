@@ -50,7 +50,7 @@ module "health_lambda" {
   package_type                        = "Zip"
   publish                             = false
   reserved_concurrent_executions      = var.reserved_concurrent_executions
-  role_name                           = var.unique_dashboard_name_enabled ? "${module.context.namespace}-${module.context.environment}-${var.unique_dashboard_name}-lambda-role" :"${module.context.id}-lambda-role"
+  role_name                           = var.unique_dashboard_name_enabled ? "${module.context.namespace}-${module.context.environment}-${var.unique_dashboard_name}-lambda-role" : "${module.context.id}-lambda-role"
   runtime                             = "provided.al2"
   s3_bucket                           = null
   s3_key                              = null
