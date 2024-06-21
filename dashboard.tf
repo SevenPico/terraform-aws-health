@@ -84,7 +84,7 @@ locals {
 
 resource "aws_cloudwatch_dashboard" "health" {
   count          = module.context.enabled ? 1 : 0
-  dashboard_name = module.context.id
+  dashboard_name = var.unique_dashboard_name_enabled ? var.unique_dashboard_name : module.context.id
   dashboard_body = jsonencode({
     periodOverride = "inherit"
     widgets        = concat(local.alarm_widgets, local.http_status_widgets, local.cicd_widgets, var.additional_widgets)
